@@ -33,6 +33,10 @@
     <Reference Include="Iesi.Collections">
       <HintPath>packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -45,7 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Files\MigrationFile.cs" />
+    <Compile Include="MigrationGenerator.cs" />
+    <Compile Include="Migrations\AlterColumnMigration.cs" />
+    <Compile Include="Migrations\Base\ConstructiveMigration.cs" />
+    <Compile Include="Migrations\Base\DestructiveMigration.cs" />
+    <Compile Include="Migrations\Base\Migration.cs" />
+    <Compile Include="Migrations\CreateColumnMigration.cs" />
+    <Compile Include="Migrations\CreateTableMigration.cs" />
+    <Compile Include="Migrations\DeleteColumnMigration.cs" />
+    <Compile Include="Migrations\DropTableMigration.cs" />
+    <Compile Include="Migrations\Helpers\MigrationHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scheme\MigrationColumn.cs" />
+    <Compile Include="Scheme\MigrationColumnFactory.cs" />
+    <Compile Include="Scheme\MigrationScheme.cs" />
+    <Compile Include="Scheme\MigrationTable.cs" />
+    <Compile Include="Script.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

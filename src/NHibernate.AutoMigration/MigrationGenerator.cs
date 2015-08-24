@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
+using NHibernate.AutoMigration.Files;
+using System.Text;
 
 namespace NHibernate.AutoMigration
 {
@@ -91,37 +93,15 @@ namespace NHibernate.AutoMigration
 
            foreach (var tableName in migrationsByTable.Keys)
            {
-               var filename = string.Format("Migration_{0}.cs", tableName);
+                var filename = string.Format("Migration_{0}.cs", tableName);
+                var migrationFile = new MigrationCsFile(filename, new ASCIIEncoding());
+             
                var upscript = string.Join(System.Environment.NewLine, migrationsByTable[tableName].Select(m => m.UpScript()));
                var downscript = string.Join(System.Environment.NewLine, migrationsByTable[tableName].Select(m => m.DownScript())); // todo invert the list
 
-               var content = @"
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentMigrator;
+               
 
-namespace Pricing.Migrations
-{
-    [Version(1,0,0,0,0)]
-    public class Migration_"+tableName+@" : Migration
-    {
-        public override void Up()
-        {
-            "+upscript+@"
-        }
-
-        public override void Down()
-        {
-            "+downscript+@"
-        }
-    }
-}
-";
-
-               yield return new MigrationFile(filename, content);
+               yield return migrationFile;
            }
        }
 

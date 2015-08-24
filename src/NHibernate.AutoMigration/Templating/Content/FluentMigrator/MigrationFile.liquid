@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentMigrator;
+
+namespace {{model.Namespace}}
+{
+    {{model.ClassAttribute}}
+    public class {{model.ClassName}} {% if model.IsInherited %}: {{model.BaseClassName}} {% endif %}
+    {
+        public override void Up()
+        {
+            {{model.UpCode}}
+        }
+
+        public override void Down()
+        {
+            {{model.DownCode}}
+        }
+    }
+}

@@ -11,7 +11,7 @@ namespace NHibernate.AutoMigration.Templating
     /// <summary>
     /// Templating class
     /// </summary>
-    public class TemplateGenerator
+    public class LiquidTemplateRenderer : ITemplateRenderer
     {
         /// <summary>
         /// Renders the specified template content.
@@ -22,7 +22,7 @@ namespace NHibernate.AutoMigration.Templating
         public void Render(string templateContent, object model, Stream output)
         {
             var template = Template.Parse(templateContent);
-            template.Render(output, TemplateGenerator.BuildRenderParameters(model));
+            template.Render(output, LiquidTemplateRenderer.BuildRenderParameters(model));
 
         }
 
@@ -34,8 +34,16 @@ namespace NHibernate.AutoMigration.Templating
         /// <returns>generated content</returns>
         public string Render(string templateContent, object model)
         {
-            var template = Template.Parse(templateContent);
-            return template.Render(TemplateGenerator.BuildRenderParameters(model));
+            using (var output = new MemoryStream())
+            {
+                this.Render(templateContent, model, output);
+                output.Seek(0, SeekOrigin.Begin);
+
+                using (var streamReader = new StreamReader(output, true))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>
@@ -47,7 +55,7 @@ namespace NHibernate.AutoMigration.Templating
         {
             return new RenderParameters
             {
-                LocalVariables = DotLiquid.Hash.FromAnonymousObject(new { model = model })
+                LocalVariables = DotLiquid.Hash.FromAnonymousObject(model)
             };
         }
     }

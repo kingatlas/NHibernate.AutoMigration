@@ -59,6 +59,12 @@
   <ItemGroup>
     <Compile Include="Files\MigrationCsFile.cs" />
     <Compile Include="Files\MigrationFile.cs" />
+    <Compile Include="Templating\Templates\FluentMigrator\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Helpers\Resources.cs" />
     <Compile Include="MigrationGenerator.cs" />
     <Compile Include="Migrations\AlterColumnMigration.cs" />
     <Compile Include="Migrations\Base\ConstructiveMigration.cs" />
@@ -75,14 +81,19 @@
     <Compile Include="Scheme\MigrationScheme.cs" />
     <Compile Include="Scheme\MigrationTable.cs" />
     <Compile Include="Script.cs" />
+    <Compile Include="Templating\ITemplateRenderer.cs" />
     <Compile Include="Templating\Models\FluentMigrator\MigrationFileModel.cs" />
-    <Compile Include="Templating\TemplateGenerator.cs" />
+    <Compile Include="Templating\LiquidTemplateRenderer.cs" />
+    <EmbeddedResource Include="Templating\Templates\FluentMigrator\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templating\Content\FluentMigrator\MigrationFile.liquid" />
+    <EmbeddedResource Include="Templating\Templates\FluentMigrator\MigrationFile.liquid" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

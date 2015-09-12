@@ -10,6 +10,7 @@ namespace NHibernate.AutoMigration
 {
    public class MigrationGenerator
     {
+        public readonly Encoding Encoding;
 
         public string PreviousSnapshotFileName { get; protected set; }
 
@@ -19,8 +20,9 @@ namespace NHibernate.AutoMigration
 
 
 
-        public MigrationGenerator(NHibernate.Cfg.Configuration configuration)
+        public MigrationGenerator(NHibernate.Cfg.Configuration configuration, Encoding encoding)
         {
+            this.Encoding = encoding;
             Configuration = configuration;
             Configuration.BuildMappings(); // necessary to complete columns creation (foreign keys...)
 
@@ -94,7 +96,7 @@ namespace NHibernate.AutoMigration
            foreach (var tableName in migrationsByTable.Keys)
            {
                 var filename = string.Format("Migration_{0}.cs", tableName);
-                var migrationFile = new MigrationCsFile(filename, new ASCIIEncoding());
+                var migrationFile = new MigrationCsFile(filename, this.Encoding);
              
                var upscript = string.Join(System.Environment.NewLine, migrationsByTable[tableName].Select(m => m.UpScript()));
                var downscript = string.Join(System.Environment.NewLine, migrationsByTable[tableName].Select(m => m.DownScript())); // todo invert the list

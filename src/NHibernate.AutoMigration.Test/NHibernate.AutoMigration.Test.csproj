@@ -77,11 +77,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Templating\Templates\FluentMigrator\MigrationFile1.cs" />
+    <None Include="Templating\Templates\FluentMigrator\Sample1.cs" />
     <EmbeddedResource Include="Templating\Templates\FluentMigrator\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Templating\Templates\FluentMigrator\Template1.liquid" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

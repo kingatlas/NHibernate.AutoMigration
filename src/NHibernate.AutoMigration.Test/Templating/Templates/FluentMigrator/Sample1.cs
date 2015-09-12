@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentMigrator;
 
-namespace {{Namespace}}
+namespace A.B.C
 {
-{% for migration in Migrations -%}
-{{migration}}
-{% endfor -%}
+//migration 3
+//migration 2
+//migration 1
 }

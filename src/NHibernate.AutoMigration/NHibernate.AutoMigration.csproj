@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Files\MigrationCsFile.cs" />
     <Compile Include="Files\MigrationFile.cs" />
+    <Compile Include="Templating\Models\FluentMigrator\MigrationClassModel.cs" />
     <Compile Include="Templating\Templates\FluentMigrator\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Templating\Templates\FluentMigrator\MigrationClass.liquid" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templating\Templates\FluentMigrator\MigrationFile.liquid" />

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using NUnit.Framework;
 using NHibernate.AutoMigration.Templating;
 using System.IO;
 using System.Reflection;
-using DotLiquid;
 
 namespace NHibernate.AutoMigration.Test.Templating
 {
@@ -15,17 +16,7 @@ namespace NHibernate.AutoMigration.Test.Templating
         /// </summary>
         public class Sample1Model 
         {
-            public bool IsInherited { get; set; }
-
-            public string ClassAttribute { get; set; }
-
-            public string ClassName { get; set; }
-
-            public string BaseClassName { get; set; }
-
-            public string UpCode { get; set; }
-
-            public string DownCode { get; set; }
+            public IEnumerable<string> Migrations { get; set; }
 
             public string Namespace { get; set; }
         }
@@ -36,12 +27,7 @@ namespace NHibernate.AutoMigration.Test.Templating
         {
             this.sample1Model = new Sample1Model()
             {
-                IsInherited = true,
-                ClassAttribute = "[Attr1]",
-                ClassName = "C1",
-                BaseClassName = "C0",
-                UpCode = @"var a=""up"";",
-                DownCode = @"var a=""down"";",
+                Migrations = new [] { "//migration 3", "//migration 2", "//migration 1" },
                 Namespace = "A.B.C"
             };
         }
@@ -55,8 +41,8 @@ namespace NHibernate.AutoMigration.Test.Templating
             var liquidTemplateRenderer = new LiquidTemplateRenderer();
             
 
-            var templateContent = NHibernate.AutoMigration.Templating.Templates.FluentMigrator.Resources.MigrationFile;
-            var expectedContent = Templating.Templates.FluentMigrator.Resources.MigrationFile1;
+            var templateContent = Templating.Templates.FluentMigrator.Resources.Template1;
+            var expectedContent = Templating.Templates.FluentMigrator.Resources.Sample1;
 
             var content = liquidTemplateRenderer.Render(templateContent, sample1Model);
 
@@ -72,8 +58,8 @@ namespace NHibernate.AutoMigration.Test.Templating
         {
             var liquidTemplateRenderer = new LiquidTemplateRenderer();
 
-            var templateContent = NHibernate.AutoMigration.Templating.Templates.FluentMigrator.Resources.MigrationFile;
-            var expectedContent = Templating.Templates.FluentMigrator.Resources.MigrationFile1;
+            var templateContent = Templating.Templates.FluentMigrator.Resources.Template1;
+            var expectedContent = Templating.Templates.FluentMigrator.Resources.Sample1;
             string content = null;
 
             using (var output = new MemoryStream())

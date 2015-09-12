@@ -68,24 +68,33 @@ namespace NHibernate.AutoMigration.Test.Templating.Templates.FluentMigrator {
         ///
         ///namespace A.B.C
         ///{
-        ///    [Attr1]
-        ///    public class C1 : C0
-        ///    {
-        ///        public override void Up()
-        ///        {
-        ///            var a=&quot;up&quot;;
-        ///        }
-        ///
-        ///        public override void Down()
-        ///        {
-        ///            var a=&quot;down&quot;;
-        ///        }
-        ///    }
+        /////migration 3
+        /////migration 2
+        /////migration 1
         ///}.
         /// </summary>
-        internal static string MigrationFile1 {
+        internal static string Sample1 {
             get {
-                return ResourceManager.GetString("MigrationFile1", resourceCulture);
+                return ResourceManager.GetString("Sample1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using System;
+        ///using System.Collections.Generic;
+        ///using System.Linq;
+        ///using FluentMigrator;
+        ///
+        ///namespace {{Namespace}}
+        ///{
+        ///{% for migration in Migrations -%}
+        ///{{migration}}
+        ///{% endfor -%}
+        ///}.
+        /// </summary>
+        internal static string Template1 {
+            get {
+                return ResourceManager.GetString("Template1", resourceCulture);
             }
         }
     }
